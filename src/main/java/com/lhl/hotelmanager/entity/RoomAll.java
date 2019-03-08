@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Room {
+public class RoomAll {
 
     private int id;
 
@@ -26,5 +26,7 @@ public class Room {
     private String typeName;
 
     private double prise;
+
+    private int status;
 
 }

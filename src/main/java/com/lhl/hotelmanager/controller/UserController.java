@@ -31,10 +31,9 @@ public class UserController {
     @PostMapping(value = "/login", produces = "application/json;charset=UTF-8")
     public User Login(@RequestBody User user) {
         User loginUser = userService.login(user);//= new User();
-        /*if(loginUser!=null){
+        if (loginUser != null) {
             request.getSession().setAttribute("loginUser",loginUser);
-        }*/
-
+        }
         return loginUser;
     }
 

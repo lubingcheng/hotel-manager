@@ -6,25 +6,18 @@ import lombok.NoArgsConstructor;
 
 /**
  * @program: hotel-manager
- * @Date: 2018/11/13 0013 下午 7:10
+ * @Date: 2019/3/8 0008 下午 3:51
  * @Author: <.*)#)))<
  * @Description:
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Room {
+@AllArgsConstructor
+public class RoomStatus {
 
     private int id;
 
-    private int code;
+    private int roomCode;
 
-    private int floor;
-
-    private int type;
-
-    private String typeName;
-
-    private double prise;
-
+    private int status;
 }
