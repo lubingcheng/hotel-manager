@@ -8,7 +8,6 @@ import com.lhl.hotelmanager.tools.SessionInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
@@ -54,19 +53,14 @@ public class WebMvcConfigurationInit extends WebMvcConfigurationSupport {
      *
      * @param registry
      */
-    @Override
+   /* @Override
     protected void addCorsMappings(CorsRegistry registry) {
-/*        registry
-                .addMapping("/**")
-                .allowedHeaders("**")
-                .allowedMethods("GET", "OPTIONS", "POST")
-                .allowedOrigins("*");*/
         registry.addMapping("/**")
                 .allowedHeaders("*")
                 .allowedOrigins("*")
                 .allowedMethods("GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "TRACE")
                 .allowCredentials(true);
-    }
+    }*/
 
     /**
      * 加载拦截器
@@ -75,7 +69,7 @@ public class WebMvcConfigurationInit extends WebMvcConfigurationSupport {
      */
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
-        // registry.addInterceptor(processInterceptor).addPathPatterns("/**");
+        registry.addInterceptor(processInterceptor).addPathPatterns("/**");
         registry.addInterceptor(sessionInterceptor).addPathPatterns("/**");
     }
 }

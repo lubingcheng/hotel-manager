@@ -1,8 +1,7 @@
 package com.lhl.hotelmanager.serviceImpl;
 
 import com.lhl.hotelmanager.dao.RoomDao;
-import com.lhl.hotelmanager.entity.Room;
-import com.lhl.hotelmanager.entity.RoomAll;
+import com.lhl.hotelmanager.entity.*;
 import com.lhl.hotelmanager.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +22,7 @@ public class RoomServiceImpl implements RoomService {
     RoomDao roomDao;
 
     @Override
-    public List getAllRoom() {
+    public List getAllRoomTree() {
         List result = new ArrayList();
         List<Room> floors = roomDao.getAllFloor();
         List<RoomAll> rooms = roomDao.getAllRoom();
@@ -39,5 +38,53 @@ public class RoomServiceImpl implements RoomService {
         }
 
         return result;
+    }
+
+    @Override
+    public List<Room> getAllRoomByStatus(int status) {
+        if (status == 3) {
+            return roomDao.getAllRoomWithOutStatus(2);
+        }
+        return roomDao.getAllRoomByStatus(status);
+    }
+
+    @Override
+    public int insertReservation(Reservation reservation) {
+        return roomDao.insertReservation(reservation);
+    }
+
+    @Override
+    public int insertInRoom(InRoom inRoom) {
+        return roomDao.insertInRoom(inRoom);
+    }
+
+    @Override
+    public int updateRoomStatus(int id, int status, int orderCode) {
+        return roomDao.updateRoomStatus(id, status, orderCode);
+    }
+
+    @Override
+    public int updateReservationStatus(int id) {
+        return roomDao.updateReservationStatus(id);
+    }
+
+    @Override
+    public RoomStatus selectRoomStatusByCode(int code) {
+        return roomDao.selectRoomStatusByCode(code);
+    }
+
+    @Override
+    public Reservation getReservationById(int id) {
+        return roomDao.getReservationById(id);
+    }
+
+    @Override
+    public List<Reservation> getAllReservation() {
+        return roomDao.getAllReservation();
+    }
+
+    @Override
+    public List getAllRoom() {
+        return roomDao.getAllRoom();
     }
 }

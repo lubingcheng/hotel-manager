@@ -20,4 +20,6 @@ public class RoomStatus {
     private int roomCode;
 
     private int status;
+
+    private int orderCode;
 }

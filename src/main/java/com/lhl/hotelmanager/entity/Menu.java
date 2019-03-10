@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * @program: hotel-manager
  * @Date: 2019/3/2 0002 下午 3:53
@@ -21,11 +23,16 @@ public class Menu {
 
     private String menuCode;
 
-    private String parentMenu;
+    private int parentMenu;
 
     private String creatUser;
 
     private String creatTime;
 
     private String icon;
+
+    private int order;
+
+    private List<Menu> children;
+
 }

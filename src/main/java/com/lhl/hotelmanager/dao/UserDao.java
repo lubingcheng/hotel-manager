@@ -18,4 +18,5 @@ public interface UserDao {
     User login(User user);
 
     List<Menu> getMenu();
+
 }

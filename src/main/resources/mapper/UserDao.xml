@@ -2,11 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lhl.hotelmanager.dao.UserDao">
 
+
+    <select id="getChildByParentId" parameterType="int" resultMap="TreeResultMap">
+        select * from menu where parentMenu = #{id} and isused = 0 order by `order`;
+    </select>
+
+    <select id="getMenu" resultMap="TreeResultMap">
+        select * from menu where parentMenu = 0 and isused = 0 order by `order`;
+    </select>
+
     <select id="login" parameterType="String" resultType="com.lhl.hotelmanager.entity.User">
         select * from user where userName=#{userName}  and passWord=#{passWord}
     </select>
 
-    <select id="getMenu" resultType="com.lhl.hotelmanager.entity.Menu">
-        select * from menu
-    </select>
+    <resultMap id="TreeResultMap" type="com.lhl.hotelmanager.entity.Menu">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="menuName" property="menuName" jdbcType="VARCHAR"/>
+        <result column="menuCode" property="menuCode" jdbcType="VARCHAR"/>
+        <result column="parentMenu" property="parentMenu" jdbcType="INTEGER"/>
+        <result column="creatUser" property="creatUser" jdbcType="INTEGER"/>
+        <result column="creatTime" property="creatTime" jdbcType="TIMESTAMP"/>
+        <result column="icon" property="icon" jdbcType="VARCHAR"/>
+        <result column="order" property="order" jdbcType="INTEGER"/>
+        <collection property="children" ofType="com.lhl.hotelmanager.entity.Menu" column="id"
+                    select="getChildByParentId">
+
+        </collection>
+    </resultMap>
+
+
 </mapper>

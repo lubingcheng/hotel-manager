@@ -13,8 +13,8 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@NoArgsConstructor  //lombok 自动生成无参构造函数
-@AllArgsConstructor //lombok 自动生成所有参数构造函数
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResultMap {
 
     private boolean success;
@@ -24,6 +24,7 @@ public class ResultMap {
     private Object errorMessage;
 
     private Object data;
+
 
     @Override
     public String toString() {

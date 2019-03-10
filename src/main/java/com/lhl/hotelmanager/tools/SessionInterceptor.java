@@ -21,7 +21,7 @@ public class SessionInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
         System.out.println(request.getRequestURI());
-        if (request.getRequestURI().equals("/user/login") || request.getRequestURI().equals("/user/getMenu")) {
+        if (request.getRequestURI().equals("/user/login")) {
             return true;
         }
         Object object = request.getSession().getAttribute("loginUser");

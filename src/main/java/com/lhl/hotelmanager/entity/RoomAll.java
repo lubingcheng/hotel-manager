@@ -29,4 +29,6 @@ public class RoomAll {
 
     private int status;
 
+    private int orderCode;
+
 }
