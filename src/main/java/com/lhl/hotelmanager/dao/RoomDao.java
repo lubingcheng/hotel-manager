@@ -36,4 +36,11 @@ public interface RoomDao {
     int updateReservationStatus(int id);
 
     List<Reservation> getAllReservation();
+
+    InRoom getInRoomById(int id);
+
+    int insertOutRoom(OutRoom outRoom);
+
+    int updateInRoomStatus(int id);
+
 }

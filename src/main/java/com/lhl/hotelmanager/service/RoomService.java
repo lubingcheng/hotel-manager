@@ -1,9 +1,6 @@
 package com.lhl.hotelmanager.service;
 
-import com.lhl.hotelmanager.entity.InRoom;
-import com.lhl.hotelmanager.entity.Reservation;
-import com.lhl.hotelmanager.entity.Room;
-import com.lhl.hotelmanager.entity.RoomStatus;
+import com.lhl.hotelmanager.entity.*;
 
 import java.util.List;
 
@@ -34,5 +31,11 @@ public interface RoomService {
     Reservation getReservationById(int id);
 
     List<Reservation> getAllReservation();
+
+    InRoom getInRoomById(int id);
+
+    int insertOutRoom(OutRoom outRoom);
+
+    int updateInRoomStatus(int id);
 
 }

@@ -84,6 +84,21 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    public InRoom getInRoomById(int id) {
+        return roomDao.getInRoomById(id);
+    }
+
+    @Override
+    public int insertOutRoom(OutRoom outRoom) {
+        return roomDao.insertOutRoom(outRoom);
+    }
+
+    @Override
+    public int updateInRoomStatus(int id) {
+        return roomDao.updateInRoomStatus(id);
+    }
+
+    @Override
     public List getAllRoom() {
         return roomDao.getAllRoom();
     }

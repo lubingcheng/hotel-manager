@@ -1,6 +1,7 @@
 package com.lhl.hotelmanager.controller;
 
 import com.lhl.hotelmanager.entity.InRoom;
+import com.lhl.hotelmanager.entity.OutRoom;
 import com.lhl.hotelmanager.entity.Reservation;
 import com.lhl.hotelmanager.entity.RoomStatus;
 import com.lhl.hotelmanager.service.RoomService;
@@ -87,4 +88,31 @@ public class RoomController {
         return reservations;
     }
 
+    /**
+     * 离店管理
+     *
+     * @param inRoom
+     * @return
+     */
+    @PostMapping(value = "/insertOutRoom", produces = "application/json;charset=UTF-8")
+    public Object insertOutRoom(@RequestBody OutRoom outRoom) {
+        RoomStatus room = roomService.selectRoomStatusByCode(outRoom.getRoomCode());
+        if (room.getStatus() == 2) {
+            int result = roomService.insertOutRoom(outRoom);
+            roomService.updateRoomStatus(outRoom.getRoomCode(), 0, outRoom.getId());
+            roomService.updateInRoomStatus(room.getOrderCode());
+            if (result > 0) {
+                return outRoom;
+            }
+        }
+        return "error";
+    }
+
+
+    @PostMapping(value = "/getInRoomById", produces = "application/json;charset=UTF-8")
+    public Object getInRoomById(@RequestBody Map<String, String> params) {
+        int id = Integer.parseInt(params.get("id"));
+        InRoom result = roomService.getInRoomById(id);
+        return result;
+    }
 }

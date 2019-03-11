@@ -67,7 +67,7 @@
 
     <insert id="insertInRoom" parameterType="com.lhl.hotelmanager.entity.InRoom" useGeneratedKeys="true"
             keyProperty="id">
-      INSERT INTO inRoom
+      INSERT INTO inroom
       (
           id,roomCode,roomType,roomTypeName,roomFloor,roomPrise,`name`,idCard,phone,`time`,outTime,`status`,`day`,personNum
       )
@@ -93,7 +93,44 @@
         select * from reservation where id = #{id};
     </select>
 
+
     <select id="getAllReservation" resultType="com.lhl.hotelmanager.entity.Reservation">
         select * from reservation ;
     </select>
+
+    <!-- 离店管理 -->
+
+    <select id="getInRoomById" parameterType="int" resultType="com.lhl.hotelmanager.entity.InRoom">
+        select * from inroom where id = #{id}
+    </select>
+
+    <insert id="insertOutRoom" parameterType="com.lhl.hotelmanager.entity.OutRoom" useGeneratedKeys="true"
+            keyProperty="id">
+      INSERT INTO outroom
+      (
+          id,roomCode,roomType,roomTypeName,roomFloor,roomPrise,`name`,idCard,phone,`inTime`,outTime,`day`,personNum,`consum`,`remarks`
+      )
+      VALUES (
+          #{id},
+          #{roomCode},
+          #{roomType},
+          #{roomTypeName},
+          #{roomFloor},
+          #{roomPrise},
+          #{name},
+          #{idCard},
+          #{phone},
+          #{inTime},
+          #{outTime},
+          #{day},
+          #{personNum},
+          #{consum},
+          #{remarks}
+      )
+   </insert>
+
+    <update id="updateInRoomStatus">
+        update inroom set status = 1 where id = #{id};
+    </update>
+
 </mapper>
