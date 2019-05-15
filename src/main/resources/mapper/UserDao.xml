@@ -29,6 +29,55 @@
 
         </collection>
     </resultMap>
+    
+    <select id="getAllUser" resultType="com.lhl.hotelmanager.entity.User">
+        select * from user
+    </select>
 
+    <insert id="insertUser" parameterType="com.lhl.hotelmanager.entity.User">
+        insert into user (userName,birthday,sex,address,passWord,realName,idCard) value (#{userName},#{birthday},#{sex},#{address},#{passWord}
+        ,#{realName},#{idCard});
+    </insert>
+
+    <delete id="deleteUser" parameterType="int">
+        delete from user where id = #{id};
+    </delete>
+
+    <select id="getAllRoom" resultType="com.lhl.hotelmanager.entity.Room">
+        select * from room order by `code`;
+    </select>
+    
+    <insert id="insertRoom" parameterType="com.lhl.hotelmanager.entity.Room">
+        insert into room (code,floor,type,prise,typeName) value (#{code},#{floor},#{type},#{prise},#{typeName});
+    </insert>
+
+    <delete id="deleteRoom" parameterType="int">
+        delete from room where id = #{id};
+    </delete>
+
+    <update id="updateRoom" parameterType="com.lhl.hotelmanager.entity.Room">
+        update room
+        <set>
+            <if test="code != null">code=#{code},</if>
+            <if test="type != null">`type`=#{type},</if>
+            <if test="typeName != null">typeName=#{typeName},</if>
+            <if test="floor != null">floor=#{floor},</if>
+            <if test="prise !=null">prise=#{prise}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <update id="updateUser" parameterType="com.lhl.hotelmanager.entity.User">
+        update user
+        <set>
+            <if test="userName != null">userName=#{userName},</if>
+            <if test="passWord != null">passWord=#{passWord},</if>
+            <if test="sex != null">sex=#{sex},</if>
+            <if test="address != null">address=#{address},</if>
+            <if test="realName !=null">realName=#{realName},</if>
+            <if test="idCard !=null">idCard=#{idCard}</if>
+        </set>
+        where id=#{id}
+    </update>
 
 </mapper>

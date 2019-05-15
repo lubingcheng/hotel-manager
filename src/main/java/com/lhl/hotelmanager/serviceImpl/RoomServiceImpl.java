@@ -54,6 +54,11 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    public int updateReservation(Reservation reservation) {
+        return roomDao.updateReservation(reservation);
+    }
+
+    @Override
     public int insertInRoom(InRoom inRoom) {
         return roomDao.insertInRoom(inRoom);
     }
@@ -79,8 +84,23 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    public List<Reservation> getTodayReservation() {
+        return roomDao.getTodayReservation();
+    }
+
+    @Override
     public List<Reservation> getAllReservation() {
         return roomDao.getAllReservation();
+    }
+
+    @Override
+    public List<InRoom> getAllInRoom() {
+        return roomDao.getAllInRoom();
+    }
+
+    @Override
+    public List<OutRoom> getAllOutRoom() {
+        return roomDao.getAllOutRoom();
     }
 
     @Override
@@ -96,6 +116,11 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public int updateInRoomStatus(int id) {
         return roomDao.updateInRoomStatus(id);
+    }
+
+    @Override
+    public int changeRoom(InRoom inRoom) {
+        return roomDao.changeRoom(inRoom);
     }
 
     @Override

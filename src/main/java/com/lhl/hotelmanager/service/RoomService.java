@@ -20,6 +20,8 @@ public interface RoomService {
 
     int insertReservation(Reservation reservation);
 
+    int updateReservation(Reservation reservation);
+
     int insertInRoom(InRoom inRoom);
 
     int updateRoomStatus(int id, int status, int orderCode);
@@ -30,12 +32,20 @@ public interface RoomService {
 
     Reservation getReservationById(int id);
 
+    List<Reservation> getTodayReservation();
+
     List<Reservation> getAllReservation();
+
+    List<InRoom> getAllInRoom();
+
+    List<OutRoom> getAllOutRoom();
 
     InRoom getInRoomById(int id);
 
     int insertOutRoom(OutRoom outRoom);
 
     int updateInRoomStatus(int id);
+
+    int changeRoom(InRoom inRoom);
 
 }

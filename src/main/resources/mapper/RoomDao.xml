@@ -13,6 +13,9 @@
             <result column="status" property="status"/>
         </association>
     </resultMap>-->
+    <select id="getTodayReservation" resultType="com.lhl.hotelmanager.entity.Reservation">
+        select * from reservation where roomCode = 0 and (select date_format(inTime,'%Y-%m-%d')) = (select date_format(now(),'%Y-%m-%d'));
+    </select>
 
     <select id="getAllRoomByStatus" parameterType="int" resultType="com.lhl.hotelmanager.entity.RoomAll">
         SELECT r.*,s.`status`,s.orderCode  from room r LEFT JOIN room_status s on r.`code` = s.`roomCode` where s.`status` = #{status}  order by r.`code`
@@ -52,6 +55,18 @@
           #{day}
       )
    </insert>
+
+    <update id="updateReservation" parameterType="com.lhl.hotelmanager.entity.Reservation" >
+        update reservation
+        <set>
+            <if test="roomCode != null">roomCode=#{roomCode},</if>
+            <if test="roomType != null">roomType=#{roomType},</if>
+            <if test="roomTypeName != null">roomTypeName=#{roomTypeName},</if>
+            <if test="roomFloor != null">roomFloor=#{roomFloor},</if>
+            <if test="roomPrise !=null">roomPrise=#{roomPrise}</if>
+        </set>
+        where id=#{id}
+    </update>
 
     <select id="selectRoomStatusByCode" parameterType="int" resultType="com.lhl.hotelmanager.entity.RoomStatus">
         select *  from room_status where roomCode = #{code};
@@ -93,11 +108,6 @@
         select * from reservation where id = #{id};
     </select>
 
-
-    <select id="getAllReservation" resultType="com.lhl.hotelmanager.entity.Reservation">
-        select * from reservation ;
-    </select>
-
     <!-- 离店管理 -->
 
     <select id="getInRoomById" parameterType="int" resultType="com.lhl.hotelmanager.entity.InRoom">
@@ -133,4 +143,22 @@
         update inroom set status = 1 where id = #{id};
     </update>
 
+    <update id="changeRoom">
+        update inroom set roomCode = #{roomCode}, roomType= #{roomType},roomTypeName=#{roomTypeName},roomFloor=#{roomFloor}
+        , roomPrise = #{roomPrise}
+        where id = #{id};
+    </update>
+
+    <!--查询管理 -->
+    <select id="getAllReservation" resultType="com.lhl.hotelmanager.entity.Reservation">
+        select * from reservation order by inTime desc;
+    </select>
+
+    <select id="getAllInRoom" resultType="com.lhl.hotelmanager.entity.InRoom">
+        select * from inroom order by outTime,status desc;
+    </select>
+
+    <select id="getAllOutRoom" resultType="com.lhl.hotelmanager.entity.OutRoom">
+        select * from outroom order by outTime desc;
+    </select>
 </mapper>

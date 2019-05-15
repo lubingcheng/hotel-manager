@@ -25,6 +25,8 @@ public interface RoomDao {
 
     int insertReservation(Reservation reservation);
 
+    int updateReservation(Reservation reservation);
+
     int insertInRoom(InRoom inRoom);
 
     int updateRoomStatus(@Param("code") int code, @Param("status") int status, @Param("orderCode") int orderCode);
@@ -33,14 +35,22 @@ public interface RoomDao {
 
     Reservation getReservationById(int id);
 
+    List<Reservation> getTodayReservation();
+
     int updateReservationStatus(int id);
 
     List<Reservation> getAllReservation();
+
+    List<InRoom> getAllInRoom();
+
+    List<OutRoom> getAllOutRoom();
 
     InRoom getInRoomById(int id);
 
     int insertOutRoom(OutRoom outRoom);
 
     int updateInRoomStatus(int id);
+
+    int changeRoom(InRoom inRoom);
 
 }
